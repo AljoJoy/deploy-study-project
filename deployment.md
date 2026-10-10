@@ -18,6 +18,10 @@ Add these required [environment variables](https://fastapicloud.com/docs/builds-
 * `FIRST_SUPERUSER`: The email address of the first superuser.
 * `FRONTEND_HOST`: The public URL of the application, such as the generated `https://your-app.fastapicloud.dev` URL or a custom domain.
 
+Add this required secret to the FastAPI Cloud application:
+
+* `OPENROUTER_API_KEY`: The API key used by the resume score checker.
+
 To enable emails, add these optional environment variables with values from your email provider:
 
 * `SMTP_HOST`
@@ -44,7 +48,7 @@ python -c "import secrets; print(secrets.token_urlsafe(32))"
 
 ## Configure Continuous Deployment
 
-The included `.github/workflows/deploy.yml` workflow builds the frontend, prepares the database, and deploys the application whenever changes are pushed to `master`. You can also run it manually from the **Actions** tab.
+The included `.github/workflows/deploy.yml` workflow builds the frontend, prepares the database, and deploys the application whenever changes are pushed to `main`. You can also run it manually from the **Actions** tab.
 
 Log in to FastAPI Cloud and configure the [deploy token](https://fastapicloud.com/docs/advanced-features/deploy-tokens/) and application ID as GitHub repository secrets:
 
@@ -65,6 +69,7 @@ Add these repository secrets:
 * `DATABASE_URL`
 * `SECRET_KEY`
 * `FIRST_SUPERUSER_PASSWORD`
+* `OPENROUTER_API_KEY`
 
 Use the same values configured in FastAPI Cloud. For `DATABASE_URL`, use the connection URL from your database provider. The database must be reachable from GitHub-hosted runners so the preparation step can connect to it.
 

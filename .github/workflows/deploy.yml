@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - release-notes.md
   workflow_dispatch:
@@ -47,8 +47,10 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           FIRST_SUPERUSER: ${{ vars.FIRST_SUPERUSER }}
           FIRST_SUPERUSER_PASSWORD: ${{ secrets.FIRST_SUPERUSER_PASSWORD }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       - name: Deploy to FastAPI Cloud
         run: uv run fastapi deploy
         env:
           FASTAPI_CLOUD_TOKEN: ${{ secrets.FASTAPI_CLOUD_TOKEN }}
           FASTAPI_CLOUD_APP_ID: ${{ secrets.FASTAPI_CLOUD_APP_ID }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
