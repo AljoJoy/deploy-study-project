@@ -1,7 +1,7 @@
 import uuid
 from datetime import UTC, datetime
 
-from pydantic import EmailStr
+from pydantic import EmailStr, BaseModel
 from sqlalchemy import DateTime
 from sqlmodel import Field, Relationship, SQLModel
 
@@ -131,3 +131,16 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=128)
+
+
+class BulletFeedback(BaseModel):
+    original: str
+    issue: str
+    suggestion: str
+
+class ResumeAnalysis(BaseModel):
+    match_score: int
+    strengths: list[str]
+    gaps: list[str]
+    bullet_feedback: list[BulletFeedback]
+    summary: str
